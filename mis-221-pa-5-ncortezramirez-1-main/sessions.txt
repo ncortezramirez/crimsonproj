@@ -1,0 +1,10 @@
+1	Baseball	60	Babe Ruth	110.5	20	False	False
+2	Basketball	30	Lebron James	75.99	10	False	False
+3	Hockey	90	Wayne Gretzky	55.25	18	False	False
+4	Tennis	120	Jannik Sinner	85.99	4	False	False
+5	Football	60	Nick Saban	500	80	False	False
+6	Soccer	90	Lionel Messi	120	25	False	False
+7	Swimming	45	Michael Phelps	60	15	False	False
+8	Gymnastics	60	Simone Biles	95	12	False	False
+9	Boxing	30	Mike Tyson	200	50	False	False
+10	Golf	120	Tiger Woods	150	8	False	False
