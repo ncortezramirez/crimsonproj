@@ -1,4 +1,4 @@
-﻿using mis_221_pa_5_ncortezramirez_1;
+using mis_221_pa_5_ncortezramirez_1;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,14 +24,15 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Serve static files (your index.html)
-app.UseStaticFiles();
 app.UseDefaultFiles();
+app.UseStaticFiles();
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
 Console.WriteLine("===========================================");
 Console.WriteLine("🚀 Crimson Sports API is running!");
 Console.WriteLine("===========================================");
-Console.WriteLine("📍 API Endpoints: http://localhost:5000/api");
-Console.WriteLine("🌐 Web UI: http://localhost:5000/index.html");
+Console.WriteLine($"📍 API Endpoints: http://0.0.0.0:{port}/api");
+Console.WriteLine($"🌐 Web UI: http://0.0.0.0:{port}/index.html");
 Console.WriteLine("===========================================");
 
-app.Run("http://localhost:5000");
+app.Run($"http://0.0.0.0:{port}");
