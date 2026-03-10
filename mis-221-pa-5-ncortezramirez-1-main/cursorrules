@@ -1,0 +1,7 @@
+# Crimson Sports Complex - Stack
+
+- **Backend**: ASP.NET Core Web API (net9), controllers in `/controllers`
+- **Frontend**: Static HTML/CSS/JS in `/wwwroot`, multi-page SPA
+- **Design**: Alabama crimson (#9C1B2E) primary, Barlow font, dark charcoal bg
+- **Auth**: Client-side session (sessionStorage) - no API auth
+- **Pages**: login, dashboard, manager, athlete, reports

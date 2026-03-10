@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager - Crimson Sports Complex</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="nav-header">
+      <h1>Crimson Sports Complex</h1>
+      <nav class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/manager.html" class="active">Manager</a>
+        <a href="/athlete.html">Athlete</a>
+        <a href="/reports.html">Reports</a>
+        <a href="/login.html">Logout</a>
+      </nav>
+    </header>
+
+    <h2 class="page-title">Manager</h2>
+    <p class="page-subtitle">Add, edit, or remove training sessions</p>
+
+    <div id="msg" class="msg" style="display: none;"></div>
+
+    <div style="margin-bottom: 1.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button class="btn" onclick="showAddSession()">Add Session</button>
+      <button class="btn btn-secondary" onclick="showRemoveSession()">Remove Session</button>
+      <button class="btn btn-secondary" onclick="showEditSession()">Edit Session</button>
+      <button class="btn btn-secondary" onclick="showMarkComplete()">Mark Complete</button>
+    </div>
+
+    <div id="content">
+      <p style="color: var(--text-muted);">Select an action above.</p>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script>
+    requireAuth(['manager', 'athlete']);
+
+    function msg(txt, type = 'success') {
+      const el = document.getElementById('msg');
+      el.textContent = txt;
+      el.className = 'msg ' + type;
+      el.style.display = 'block';
+      setTimeout(() => { el.style.display = 'none'; }, 4000);
+    }
+
+    function showAddSession() {
+      document.getElementById('content').innerHTML = `
+        <div class="card" style="max-width: 400px;">
+          <h3 style="margin-bottom: 1rem;">Add New Session</h3>
+          <div class="form-group">
+            <label>Sport Name</label>
+            <input type="text" id="sportName">
+          </div>
+          <div class="form-group">
+            <label>Coach Name</label>
+            <input type="text" id="coachName">
+          </div>
+          <div class="form-group">
+            <label>Duration (min)</label>
+            <input type="number" id="duration">
+          </div>
+          <div class="form-group">
+            <label>Price ($)</label>
+            <input type="number" step="0.01" id="price">
+          </div>
+          <div class="form-group">
+            <label>Max Seats</label>
+            <input type="number" id="seats">
+          </div>
+          <button class="btn" onclick="addSession()">Add Session</button>
+          <button class="btn btn-secondary" onclick="showManagerMenu()">Back</button>
+        </div>
+      `;
+    }
+
+    async function addSession() {
+      const data = {
+        sport: document.getElementById('sportName').value,
+        coach: document.getElementById('coachName').value,
+        duration: parseInt(document.getElementById('duration').value),
+        price: parseFloat(document.getElementById('price').value),
+        seats: parseInt(document.getElementById('seats').value)
+      };
+      try {
+        await apiCall('/sessions', 'POST', data);
+        msg('Session added.');
+        showManagerMenu();
+      } catch {
+        msg('Failed to add session.', 'error');
+      }
+    }
+
+    async function showRemoveSession() {
+      try {
+        const sessions = await apiCall('/sessions');
+        let html = '<h3 style="margin-bottom: 0.5rem;">Remove Session</h3><div class="table-wrap"><table><tr><th>ID</th><th>Sport</th><th>Coach</th><th>Action</th></tr>';
+        (sessions || []).filter(Boolean).forEach(s => {
+          html += `<tr><td>${s.id}</td><td>${s.sport}</td><td>${s.coach}</td><td><button class="btn btn-sm" onclick="removeSession(${s.id})">Delete</button></td></tr>`;
+        });
+        html += '</table></div>';
+        document.getElementById('content').innerHTML = html;
+      } catch {
+        msg('Failed to load sessions.', 'error');
+      }
+    }
+
+    async function removeSession(id) {
+      try {
+        await apiCall('/sessions/' + id, 'DELETE');
+        msg('Session deleted.');
+        showRemoveSession();
+      } catch {
+        msg('Failed to delete.', 'error');
+      }
+    }
+
+    async function showEditSession() {
+      try {
+        const sessions = await apiCall('/sessions');
+        let html = '<h3 style="margin-bottom: 0.5rem;">Edit Session</h3><div class="table-wrap"><table><tr><th>ID</th><th>Sport</th><th>Price</th><th>Action</th></tr>';
+        (sessions || []).filter(Boolean).forEach(s => {
+          html += `<tr><td>${s.id}</td><td>${s.sport}</td><td>$${s.price}</td><td><button class="btn btn-sm" onclick="editSession(${s.id}, ${s.price})">Edit</button></td></tr>`;
+        });
+        html += '</table></div>';
+        document.getElementById('content').innerHTML = html;
+      } catch {
+        msg('Failed to load sessions.', 'error');
+      }
+    }
+
+    async function editSession(id, currentPrice) {
+      const newPrice = prompt('New price (current $' + currentPrice + '):');
+      if (!newPrice) return;
+      try {
+        await apiCall('/sessions/' + id, 'PUT', { price: parseFloat(newPrice) });
+        msg('Session updated.');
+        showEditSession();
+      } catch {
+        msg('Failed to update.', 'error');
+      }
+    }
+
+    async function showMarkComplete() {
+      const sessionId = prompt('Session ID to mark complete:');
+      if (!sessionId) return;
+      try {
+        const result = await apiCall('/sessions/complete/' + sessionId, 'POST');
+        msg(result?.message || 'Done.');
+        document.getElementById('content').innerHTML = '<p style="color: var(--text-muted);">Select an action above.</p>';
+      } catch {
+        msg('Failed.', 'error');
+      }
+    }
+
+    function showManagerMenu() {
+      document.getElementById('content').innerHTML = '<p style="color: var(--text-muted);">Select an action above.</p>';
+    }
+  </script>
+</body>
+</html>

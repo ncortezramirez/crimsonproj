@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\corte\\OneDrive - The University of Alabama\\Source\\labs\\mis-221-pa-5-ncortezramirez-1\\mis-221-pa-5-ncortezramirez-1.csproj": {}
+    "C:\\Users\\corte\\OneDrive - The University of Alabama\\Source\\repos\\updatedPR\\mis-221-pa-5-ncortezramirez-1-main\\mis-221-pa-5-ncortezramirez-1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\corte\\OneDrive - The University of Alabama\\Source\\labs\\mis-221-pa-5-ncortezramirez-1\\mis-221-pa-5-ncortezramirez-1.csproj": {
+    "C:\\Users\\corte\\OneDrive - The University of Alabama\\Source\\repos\\updatedPR\\mis-221-pa-5-ncortezramirez-1-main\\mis-221-pa-5-ncortezramirez-1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\corte\\OneDrive - The University of Alabama\\Source\\labs\\mis-221-pa-5-ncortezramirez-1\\mis-221-pa-5-ncortezramirez-1.csproj",
+        "projectUniqueName": "C:\\Users\\corte\\OneDrive - The University of Alabama\\Source\\repos\\updatedPR\\mis-221-pa-5-ncortezramirez-1-main\\mis-221-pa-5-ncortezramirez-1.csproj",
         "projectName": "mis-221-pa-5-ncortezramirez-1",
-        "projectPath": "C:\\Users\\corte\\OneDrive - The University of Alabama\\Source\\labs\\mis-221-pa-5-ncortezramirez-1\\mis-221-pa-5-ncortezramirez-1.csproj",
+        "projectPath": "C:\\Users\\corte\\OneDrive - The University of Alabama\\Source\\repos\\updatedPR\\mis-221-pa-5-ncortezramirez-1-main\\mis-221-pa-5-ncortezramirez-1.csproj",
         "packagesPath": "C:\\Users\\corte\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\corte\\OneDrive - The University of Alabama\\Source\\labs\\mis-221-pa-5-ncortezramirez-1\\obj\\",
+        "outputPath": "C:\\Users\\corte\\OneDrive - The University of Alabama\\Source\\repos\\updatedPR\\mis-221-pa-5-ncortezramirez-1-main\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\corte\\AppData\\Roaming\\NuGet\\NuGet.Config"

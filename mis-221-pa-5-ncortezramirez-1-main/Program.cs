@@ -23,7 +23,6 @@ app.UseCors("AllowAll");
 app.UseAuthorization();
 app.MapControllers();
 
-// Serve static files (your index.html)
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
